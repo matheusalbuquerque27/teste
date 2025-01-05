@@ -1,3 +1,5 @@
+const teste = require ('./inquirer.js')
+
 const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -9,9 +11,9 @@ readline.question('Qual seu idioma materno?', (idioma) => {
     } else {
         console.log(`Que bom que fala ${idioma}, mas seria bom aprender inglês também.`)
     }
-    
+
     readline.close()
 
-    console.log("Deu tudo certo com o fetch")
 })
 
+teste.prompt();
