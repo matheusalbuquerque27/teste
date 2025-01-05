@@ -4,6 +4,12 @@ const readline = require('readline').createInterface({
 })
 
 readline.question('Qual seu idioma materno?', (idioma) => {
-    console.log(`Seu idioma materno é o ${idioma}`)
+    if(idioma == "inglês"){
+        console.log(`Sendo o ${idioma}, você tem grande vantagem!`)
+    } else {
+        console.log(`Que bom que fala ${idioma}, mas seria bom aprender inglês também.`)
+    }
+    
     readline.close()
 })
+
