@@ -11,5 +11,7 @@ readline.question('Qual seu idioma materno?', (idioma) => {
     }
     
     readline.close()
+
+    console.log("Deu tudo certo com o fetch")
 })
 
