@@ -1,17 +1,31 @@
-const basePath = path.join(__dirname, 'templates') //para estabelecer o caminhos dos arquivos html
+const express = require('express')
+const router = express.Router()
+
+const path = require('path') //Preciso desse módulo para manipular diretórios
+const basePath = path.join(__dirname, '../templates') //para estabelecer o caminhos dos arquivos html
+
+//middlewares para ler o body
+router.use(
+    express.urlencoded({
+        extended: true,
+    }),
+)
+
+//para transformar em json
+router.use(express.json())
 
 //usando parâmetros do método GET
-app.get('/users/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const id = req.params.id
 
     res.send(`O ID do usuário é ${id}`)
 
 })
 
-app.post('/users/save', (req, res) => {
+router.post('/save', (req, res) => {
 
     //extrair dados vindos pelo post
-    const name = req.body.name
+    const name = req.body.nome
     const senha = req.body.senha
 
     if(name == "Matt" && senha =="135"){
@@ -21,3 +35,5 @@ app.post('/users/save', (req, res) => {
     }
 
 })
+
+module.exports = router
