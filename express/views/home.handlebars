@@ -1,0 +1,26 @@
+{{#if auth}}
+
+<h2>
+    Essa é uma atualização!
+</h2>
+
+<p>Agora você está usando a template engine</p>
+<p>Dessa forma, posso saber que seu nome é {{ users.name }} e 
+    seu sobrenome é {{ users.surname }}
+</p>
+
+<h4>Sei também que vai fazer {{ users.age }} hahaha</h4>
+
+
+{{else}}
+<p>{{ msg }}</p>
+<h2>Fazer login na sua conta: </h2>
+    <div>
+        <form action="/validate" method="post">
+            <input type="text" name="name" id="" placeholder="Insira o nome">
+            <input type="password" name="password" placeholder="Insira o sobrenome">
+            <input type="submit" value="Logar">
+        </form>
+    </div>
+{{/if}}
+

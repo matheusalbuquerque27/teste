@@ -1,14 +1,15 @@
 const express = require('express')
 const app = express()
 const port = 3000 //variável ambiente
-let login = true
+const exphbs = require("express-handlebars") // import do handlebars
 
 const path = require('path') //Preciso desse módulo para manipular diretórios
 
 const basePath = path.join(__dirname, 'templates') //para estabelecer o caminhos dos arquivos html
-const users = require('./users')
 
-app.use('/users', users)
+app.engine('handlebars', exphbs.engine())
+app.set('view engine', 'handlebars')
+app.set('views', 'express/views')
 
 //middlewares para ler o body
 app.use(
@@ -23,31 +24,38 @@ app.use(express.json())
 //arquivos estáticos
 app.use(express.static('express/public'))
 
-const checkAuth = function (req, res, next) {
-    req.authStatus = login
-
-    if(req.authStatus){
-        console.log("Você está logado, seja bem vindo!")
-        next()
-    } else {
-        res.sendFile(`${basePath}/logar.html`)
-        next()
-    }
-} //Essa é uma middleware, usada para autenticações
-
-app.use(checkAuth) //inicializar/inserir a middleware
-
+/*
 app.get('/', (req, res) => {
     res.sendFile(`${basePath}/index.html`)
-}) // manipula o caminho raiz
+}) // manipula o caminho raiz de forma padrão 
+// 
+// */
 
-app.get('/logar', (req, res) => {
-    res.sendFile(`${basePath}/logar.html`)
-})
+app.get('/', (req, res) => {
+    const globalUser = {
+        name: 'Matheus',
+        surname: 'Albuquerque',
+        age: 30,
+    }
 
-app.use((req, res, next) => {
-    res.status(404).sendFile(`${basePath}/404.html`)
+    const auth = false
+
+    res.render('home', { users: globalUser, auth })
+}) // manipula o caminho raiz pela template engine handlebars
+    
+
+app.post('/validate', (req, res) => {
+    const name = req.body.name
+    const password = req.body.password
+
+
+    if(name == 'Matt' && password == '135'){
+
+        res.render('user')
+    
+    } 
 })
+    
 
 app.listen(port, () => {
     console.log(`Rodando com sucesso na porta ${port}`)
