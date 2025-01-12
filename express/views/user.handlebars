@@ -3,3 +3,23 @@
 <p>{{ user.name }}</p>
 <h3>Senha do usuário:</h3>
 <p>{{ user.surname }}</p>
+
+<h3>Esses países são da América do Sul</h3>
+
+<!--
+<ul>
+{{#each countries}}
+<li>{{this}}</li>
+{{/each}}
+</ul>
+-->
+
+<h3>Eles tem as seguintes propriedades:</h3>
+
+{{#each countriesAtributes}}
+    {{> countries}}
+{{/each}}
+
+
+
+
